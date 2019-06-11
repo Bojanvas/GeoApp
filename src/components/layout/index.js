@@ -1,0 +1,8 @@
+import { View, Text } from "react-native";
+import React from "react";
+
+const layout = ({ children }) => {
+  return <View style={styles.wrapper}>{children}</View>;
+};
+
+export default layout;
