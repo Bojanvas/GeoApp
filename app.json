@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "Geography App",
+    "slug": "geo-app",
+    "privacy": "public",
+    "sdkVersion": "33.0.0",
+    "android": {
+      "package": "com.vasilevski.geoapp"
+    },
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./app/assets/images/icon.png",
+    "splash": {
+      "image": "./app/assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    }
+  }
+}
