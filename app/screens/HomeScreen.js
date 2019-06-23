@@ -1,198 +1,136 @@
-import * as WebBrowser from 'expo-web-browser';
-import React from 'react';
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ * @flow
+ */
+
+import React, { Component } from 'react';
+import colors from './../constants/Colors';
 import {
-  Image,
-  Platform,
-  ScrollView,
+  AppRegistry,
   StyleSheet,
   Text,
   TouchableOpacity,
+  Image,
+  Modal,
   View,
+  Picker,
+  TouchableHighlight,
+  AsyncStorage,
+  Dimensions,
+  TextInput
 } from 'react-native';
 
-import { MonoText } from '../components/StyledText';
 
-export default function HomeScreen() {
-  return (
-    <View style={styles.container}>
-      <ScrollView
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}>
-        <View style={styles.welcomeContainer}>
-          <Image
-            source={
-              __DEV__
-                ? require('../assets/images/robot-dev.png')
-                : require('../assets/images/robot-prod.png')
-            }
-            style={styles.welcomeImage}
-          />
-        </View>
+//import components
 
-        <View style={styles.getStartedContainer}>
-          <DevelopmentModeNotice />
+export default class Home extends Component {
+    constructor(props){
+      super(props);
+      this.state ={
+      }
+    }
+    static navigationOptions = {
+      drawerLabel: 'Home',
+      header: null,
+    };
+  
+  componentDidMount(){
 
-          <Text style={styles.getStartedText}>Get started by opening</Text>
+  }
 
-          <View
-            style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-            <MonoText>screens/HomeScreen.js</MonoText>
-          </View>
-
-          <Text style={styles.getStartedText}>
-            Change this text and your app will automatically reload.
-          </Text>
-        </View>
-
-        <View style={styles.helpContainer}>
-          <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-            <Text style={styles.helpLinkText}>
-              Help, it didn’t automatically reload!
-            </Text>
+  render(){
+    return (
+      <View style={styles.container}>
+        <Image source={require('../assets/images/earth.jpg')} style={styles.backgroundImage}></Image>
+        <View style={styles.image}>     
+          <TouchableOpacity>
+            <Text onPress = {()=>{
+          this.props.navigation.navigate('Game');
+          }} style={styles.buttons}>Play Game</Text>
           </TouchableOpacity>
-        </View>
-      </ScrollView>
-
-      <View style={styles.tabBarInfoContainer}>
-        <Text style={styles.tabBarInfoText}>
-          This is a tab bar. You can edit it in:
-        </Text>
-
-        <View
-          style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-          <MonoText style={styles.codeHighlightText}>
-            navigation/MainTabNavigator.js
-          </MonoText>
-        </View>
+          <TouchableOpacity>
+            <Text onPress = {()=>{
+          this.props.navigation.navigate('Option');
+          }} style={styles.buttons}>Options</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text onPress = {()=>{
+          this.props.navigation.navigate('About');
+          }} style={styles.buttons}>About</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text onPress = {()=>{
+          this.props.navigation.navigate('Res');
+          }} style={styles.buttons}>Results</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text onPress = {()=>{
+          this.props.navigation.navigate('Rewards');
+          }} style={styles.buttons}>Rewards</Text>
+          </TouchableOpacity>
+          </View>   
       </View>
-    </View>
-  );
-}
-
-HomeScreen.navigationOptions = {
-  header: null,
-};
-
-function DevelopmentModeNotice() {
-  if (__DEV__) {
-    const learnMoreButton = (
-      <Text onPress={handleLearnMorePress} style={styles.helpLinkText}>
-        Learn more
-      </Text>
-    );
-
-    return (
-      <Text style={styles.developmentModeText}>
-        Development mode is enabled: your app will be slower but you can use
-        useful development tools. {learnMoreButton}
-      </Text>
-    );
-  } else {
-    return (
-      <Text style={styles.developmentModeText}>
-        You are not in development mode: your app will run at full speed.
-      </Text>
     );
   }
 }
-
-function handleLearnMorePress() {
-  WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/versions/latest/workflow/development-mode/'
-  );
-}
-
-function handleHelpPress() {
-  WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/versions/latest/workflow/up-and-running/#cant-see-your-changes'
-  );
-}
-
+var width = Dimensions.get('window').width; //full width
+var height = Dimensions.get('window').height; //full height
 const styles = StyleSheet.create({
   container: {
+    width:width,
     flex: 1,
-    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#000036',
   },
-  developmentModeText: {
-    marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
-    fontSize: 14,
-    lineHeight: 19,
+  title: {
+    fontSize: 20,
+    color:'white',
     textAlign: 'center',
+    margin: 10,
   },
-  contentContainer: {
-    paddingTop: 30,
+  backgroundImage:{
+    flex:1,
+    height: null,
+    width:width*1.9,
+    alignItems:'center',
+    justifyContent:"center",
+    resizeMode:'stretch',
   },
-  welcomeContainer: {
-    alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
-  },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
-  },
-  getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
-  },
-  homeScreenFilename: {
-    marginVertical: 7,
-  },
-  codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
-  },
-  codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
-    borderRadius: 3,
-    paddingHorizontal: 4,
-  },
-  getStartedText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    lineHeight: 24,
+  modal:{
+    fontSize:24,
     textAlign: 'center',
+    margin: 20,
   },
-  tabBarInfoContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
-    alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
+  buttons:{
+    margin:10,
+    padding:5,
+    paddingTop:7,
+    paddingBottom:7,
+    fontSize:20,
+    textAlign:'center',
+    color:'white',
+    elevation:9,
+    width:200,
+    backgroundColor: colors.mainColor,
+    fontFamily:'Space',
+    fontWeight: 'bold'
   },
-  tabBarInfoText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
+  butt:{
+    backgroundColor: colors.mainColor,
+    paddingTop:10,
+    paddingBottom:10,
+    paddingLeft:30,
+    paddingRight:30,
+    borderRadius:4,
+    width:140,
+    shadowOffset:{width: 22, height:22},
+    shadowColor:'#f6f6f6',
+    marginTop:80,
+    
   },
-  navigationFilename: {
-    marginTop: 5,
-  },
-  helpContainer: {
-    marginTop: 15,
-    alignItems: 'center',
-  },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpLinkText: {
-    fontSize: 14,
-    color: '#2e78b7',
+  image:{
+    position:'absolute'
   },
 });

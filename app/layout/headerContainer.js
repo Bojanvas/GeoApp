@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Header from './header';
 import API from './../services/Api';
-import { API_URL } from  './../constants/Api';
-import { connect } from 'react-redux';
-import { loginUser } from '../actions';
 import { bindActionCreators } from 'redux'
-import jwtDecode from 'jwt-decode';
+import { loginOutUser } from '../actions'
+import deviceStorage from '../services/deviceStorage';
+import loginServices from '../services/login';
+import {countries} from '../components/country.js';
+import { Font } from 'expo';
+
 
 import {
     Image,
@@ -17,20 +20,25 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-    loginUser
-}
+    loginOut: () => loginOutUser()
+  }
 
 class HeaderContainer extends React.Component {
     constructor(props) {
         super(props);
-        this.geoApi = new API({ url:API_URL })
-
         // This binding is necessary to make `this` work in the callback
         this.loginWithGoogle = this.loginWithGoogle.bind(this);
+        this.login = new loginServices();
     }
 
     // Set up Linking
   componentDidMount() {
+    Font.loadAsync({
+        'Slabo': require('../../app/assets/fonts/Slabo.ttf'),
+        'Space': require('../../app/assets/fonts/SpaceMono-Regular.ttf'),
+        'Sedwick': require('../../app/assets/fonts/SedgwickAveDisplay-Regular.ttf'),
+      });
+    this.loggInUserIfHaveToken();
     // Add event listener to handle OAuthLogin:// URLs
     Linking.addEventListener('url', this.handleOpenURL);
     // Launched from an external URL
@@ -50,23 +58,17 @@ class HeaderContainer extends React.Component {
     // Extract stringified user string out of the URL
     const urlString = new URL(url);
     const token = urlString.searchParams.get("token");
-    if (token != undefined) {
-        var user = jwtDecode(token);
-        console.log(user.email);
-        this.geoApi.createEntity({name :'users'});
-        this.geoApi.endpoints.users.getOne(
-            { id: user.email },
-            { headers: {"jwt" : token} }
-        )
-        .then(({data}) =>  {
-            if (data.length > 0) {
-                this.props.loginUser(user, token);
-            } else {
-                console.log('user not found')
-            }
-            
-        })
-    }
+        if (token != undefined) {
+            deviceStorage.saveItem("jwt", token);
+            this.login.getUser(token);
+        }
+    };
+
+    async loggInUserIfHaveToken () {
+        var token = await deviceStorage.getItem("jwt");
+        if (token != null) {
+            this.login.getUser(token);
+        }
     };
 
     // Open URL in a browser
@@ -81,7 +83,12 @@ class HeaderContainer extends React.Component {
 
   render() {
     return (
-        <Header user={this.props} LogginHandler = { this.loginWithGoogle}/>
+        <Header 
+            user={this.props}
+            LogginHandler={this.loginWithGoogle}
+            LogginOutHandler={this.props.loginOut}
+            countries={countries}
+        />
     )
   };
 }
