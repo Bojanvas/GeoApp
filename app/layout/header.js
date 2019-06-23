@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { SafeAreaView, StatusBar, Platform } from 'react-native';
 import Logo from '../components/logo.js';
 import GeoLocation from '../components/geoLocation.js';
+import Level from '../components/level.js';
 
 export default class HeaderContainer extends React.Component {
 
@@ -19,6 +20,7 @@ export default class HeaderContainer extends React.Component {
                 <Logo imageName='Geographylogo.png'></Logo>
                 <Text style={styles.helloMessage}>{this.props.user.loggedIn ? 'hello' : ''}</Text>
                 <Text style={styles.email}>{this.props.user.user != undefined ? this.props.user.user.email  : ''}</Text>
+                <Level level={'1'}  />
              </View>  
         </View>
         <View style={styles.icons}>

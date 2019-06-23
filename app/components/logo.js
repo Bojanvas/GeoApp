@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image } from 'react-native';
+import { Image, View } from 'react-native';
 
 class Logo extends React.Component {
     constructor(props) {
@@ -8,10 +8,13 @@ class Logo extends React.Component {
 
     render() {
         return(
-            <Image
-            style={{width: 50, height: 50}}
-            source={require('../assets/images/'+this.props.imageName)}
-          />
+            /* to do press event return to home */
+            <View>
+                <Image
+                    style={{width: 50, height: 50}}
+                    source={require('../assets/images/'+this.props.imageName)}
+                />
+            </View>
         );
     }
 

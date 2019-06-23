@@ -51,8 +51,8 @@ export default class Home extends Component {
           </TouchableOpacity>
           <TouchableOpacity>
             <Text onPress = {()=>{
-          this.props.navigation.navigate('Option');
-          }} style={styles.buttons}>Options</Text>
+            this.props.navigation.navigate('Option');
+            }} style={styles.buttons}>Options</Text>
           </TouchableOpacity>
           <TouchableOpacity>
             <Text onPress = {()=>{
