@@ -18,21 +18,25 @@ export default class HeaderContainer extends React.Component {
         <View style={styles.user}>
             <View style={styles.userInfo}>
                 <Logo imageName='Geographylogo.png'></Logo>
-                <Text style={styles.helloMessage}>{this.props.user.loggedIn ? 'hello' : ''}</Text>
                 <Text style={styles.email}>{this.props.user.user != undefined ? this.props.user.user.email  : ''}</Text>
-                <Level level={'1'}  />
+                {this.props.user.loggedIn  ? (
+                    <Level level={this.props.level}  />
+                ) : (
+                    <View></View>
+                )}
+                
              </View>  
         </View>
         <View style={styles.icons}>
             {this.props.user.loggedIn  ? (
                 <View style={styles.icons}>
-                    <Icon style={{paddingRight: 5}} name="sign-out" size={20} color="#000" />
+                    <Icon style={{paddingRight: 5}} name="sign-out" size={20} color="#fff" />
                     <Text style={styles.logOut} onPress={this.props.LogginOutHandler} >Log Out</Text>
                 </View>
             ) : (
                 <View style={styles.icons}>
                     <Text style={styles.logIn}>Log In with:  </Text>
-                    <Icon onPress={this.props.LogginHandler} name="google-plus" size={30} color="#000" />
+                    <Icon onPress={this.props.LogginHandler} name="google-plus" size={30} color="#fff" />
                 </View>
             )}
         </View>
@@ -62,7 +66,8 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        alignItems: 'center'
+        alignItems: 'center',
+        color: "#fff",
     },
     helloMessage : {
         paddingRight: 5,
@@ -73,11 +78,13 @@ const styles = StyleSheet.create({
     },
     logOut : {
         fontFamily:'Slabo',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: "#fff",
     },
     email : {
         fontFamily:'Slabo',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: "#fff",
     },
     logIn: {
         fontFamily:'Slabo',

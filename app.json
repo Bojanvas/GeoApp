@@ -1,5 +1,6 @@
 {
   "expo": {
+    "scheme": "geo-app",
     "name": "Geography App",
     "slug": "geo-app",
     "privacy": "public",
@@ -12,9 +13,9 @@
       "android",
       "web"
     ],
-    "version": "1.0.0",
+    "version": "0.1.0",
     "orientation": "portrait",
-    "icon": "./app/assets/images/icon.png",
+    "icon": "./app/assets/images/Geographylogo.png",
     "splash": {
       "image": "./app/assets/images/splash.png",
       "resizeMode": "contain",

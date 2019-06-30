@@ -6,8 +6,8 @@ import { bindActionCreators } from 'redux'
 import { loginOutUser } from '../actions'
 import deviceStorage from '../services/deviceStorage';
 import loginServices from '../services/login';
-import {countries} from '../components/country.js';
-import { Font } from 'expo';
+import { countries } from '../components/country.js';
+import * as Font from 'expo-font';
 
 
 import {
@@ -21,7 +21,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     loginOut: () => loginOutUser()
-  }
+}
 
 class HeaderContainer extends React.Component {
     constructor(props) {
@@ -37,7 +37,7 @@ class HeaderContainer extends React.Component {
         'Slabo': require('../../app/assets/fonts/Slabo.ttf'),
         'Space': require('../../app/assets/fonts/SpaceMono-Regular.ttf'),
         'Sedwick': require('../../app/assets/fonts/SedgwickAveDisplay-Regular.ttf'),
-      });
+    });
     this.loggInUserIfHaveToken();
     // Add event listener to handle OAuthLogin:// URLs
     Linking.addEventListener('url', this.handleOpenURL);
@@ -58,7 +58,7 @@ class HeaderContainer extends React.Component {
     // Extract stringified user string out of the URL
     const urlString = new URL(url);
     const token = urlString.searchParams.get("token");
-        if (token != undefined) {
+        if (token != undefined && token != null) {
             deviceStorage.saveItem("jwt", token);
             this.login.getUser(token);
         }
@@ -66,7 +66,7 @@ class HeaderContainer extends React.Component {
 
     async loggInUserIfHaveToken () {
         var token = await deviceStorage.getItem("jwt");
-        if (token != null) {
+        if (token != null && this.login.tokenIsVaild(token)) {
             this.login.getUser(token);
         }
     };
@@ -88,6 +88,7 @@ class HeaderContainer extends React.Component {
             LogginHandler={this.loginWithGoogle}
             LogginOutHandler={this.props.loginOut}
             countries={countries}
+            level={1}
         />
     )
   };

@@ -12,7 +12,8 @@ class Logo extends React.Component {
             <View>
                 <Image
                     style={{width: 50, height: 50}}
-                    source={require('../assets/images/'+this.props.imageName)}
+                    
+                    source={require('../assets/images/Geographylogo.png')}
                 />
             </View>
         );

@@ -5,6 +5,7 @@
  */
 
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import colors from './../constants/Colors';
 import {
   AppRegistry,
@@ -21,15 +22,17 @@ import {
   TextInput
 } from 'react-native';
 
+const mapStateToProps = state => ({
+  ...state.user
+})
 
 //import components
 
-export default class Home extends Component {
+class Home extends Component {
     constructor(props){
       super(props);
-      this.state ={
-      }
     }
+    
     static navigationOptions = {
       drawerLabel: 'Home',
       header: null,
@@ -47,7 +50,7 @@ export default class Home extends Component {
           <TouchableOpacity>
             <Text onPress = {()=>{
           this.props.navigation.navigate('Game');
-          }} style={styles.buttons}>Play Game</Text>
+          }} style={styles.buttons}> {this.props.loggedIn  ? 'Play Game' : 'Play Game as guest' }</Text>
           </TouchableOpacity>
           <TouchableOpacity>
             <Text onPress = {()=>{
@@ -134,3 +137,5 @@ const styles = StyleSheet.create({
     position:'absolute'
   },
 });
+
+export default connect(mapStateToProps, {})(Home);

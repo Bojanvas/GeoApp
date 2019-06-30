@@ -13,8 +13,8 @@ class API {
    * Create and store a single entity's endpoints
    * @param {A entity Object} entity
    */
-  createEntity(entity) {
-    const name = convertCaseToCamel(entity.name)
+  createEntity(entity, key) {
+    const name = convertCaseToCamel(key)
     this.endpoints[name] = this.createBasicCRUDEndpoints(entity)
   }
 

@@ -1,5 +1,6 @@
 export default {
   mainColor : '#66bb6a',
+  secondColor: '#1b5e20',
   tabIconDefault: '#ccc',
   tabBar: '#fefefe',
   errorBackground: 'red',
