@@ -2,6 +2,7 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_OUT_SUCCESS = 'LOGIN_OUT_SUCCESS';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const CREATE_NEW_GAME = 'CREATE_NEW_GAME';
+export const GAME_OVER = 'GAME_OVER';
 
 export const loginUser = (user, token) => ({
     type:LOGIN_SUCCESS,
@@ -20,6 +21,12 @@ export const createNewGame = (game) => ({
     game: {
        questions: game,
        index: 0,
-       points: 0, 
-    }
+    },
+    result: 0, 
+})
+
+export const gameOver = (result) => ({
+    type: GAME_OVER,
+    game: null,
+    result: result,
 })

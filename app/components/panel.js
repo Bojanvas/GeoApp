@@ -6,6 +6,7 @@ import {
   Text,
   Dimensions,
 } from 'react-native';
+import colors from './../constants/Colors';
 
 export default class Button extends Component {
   render() {
@@ -15,9 +16,9 @@ export default class Button extends Component {
               {"\n"}
               {this.props.time}
           </Text>
-          <Text  style={styles.quest}>Questions:
+          <Text  style={styles.quest}>qn:
               {"\n"}
-              {this.props.index + 1 }/20
+              {this.props.index + 1 }/{this.props.total}
           </Text>
       </View>
     )
@@ -36,11 +37,14 @@ const styles = StyleSheet.create({
     backgroundColor:'white',
     padding:3,
     margin:4,
-    height:height/11,
-    width:120,
+    height:height/10,
+    width:70,
     textAlign:'center',
     fontSize:20,
     fontFamily: 'Slabo',
+    borderRadius: 50,
+    borderWidth: 3,
+    borderColor: colors.mainColor,
   },
 })
 

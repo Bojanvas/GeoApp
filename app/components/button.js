@@ -29,11 +29,13 @@ const styles = StyleSheet.create({
     fontSize:22,
     backgroundColor:'white',
     color: colors.mainColor,
-    padding:5,
+    padding:10,
     elevation:6,
     fontWeight:'200',
     fontFamily: 'Slabo',
-
-},
+    borderRadius: 5,
+    borderWidth: 3,
+    borderColor: colors.mainColor,
+  },
 })
 

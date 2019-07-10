@@ -8,6 +8,7 @@ import HomeScreen from '../screens/HomeScreen';
 import GameScreen from '../screens/GameScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import ResultScreen from '../screens/ResultScreen';
 
 const screens = {
   Home: {
@@ -15,6 +16,9 @@ const screens = {
   },
   Game: {
     screen: GameScreen
+  },
+  Result: {
+    screen: ResultScreen
   },
   Option: {
     screen: SettingsScreen
